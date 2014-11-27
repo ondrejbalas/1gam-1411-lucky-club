@@ -1,0 +1,10 @@
+{
+  "name": "1411luckyclub",
+  "private": true,
+  "dependencies": {
+    "requirejs": "~2.1.8",
+    "jquery": "~1.10.2",
+    "easeljs": "*"
+  },
+  "devDependencies": {}
+}

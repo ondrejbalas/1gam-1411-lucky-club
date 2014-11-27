@@ -1,0 +1,21 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "easeljs/easeljs.d.ts": {
+      "commit": "266324c29cd7f8114cc7fe917a62986b5f00bc8f"
+    },
+    "requirejs/require.d.ts": {
+      "commit": "266324c29cd7f8114cc7fe917a62986b5f00bc8f"
+    },
+    "tweenjs/tweenjs.d.ts": {
+      "commit": "266324c29cd7f8114cc7fe917a62986b5f00bc8f"
+    },
+    "createjs-lib/createjs-lib.d.ts": {
+      "commit": "266324c29cd7f8114cc7fe917a62986b5f00bc8f"
+    }
+  }
+}
