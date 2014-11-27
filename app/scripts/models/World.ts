@@ -1,15 +1,15 @@
 ///<reference path="../../../typings/easeljs/easeljs.d.ts" />
+///<reference path="GameObjectContainer.ts"/>
 
-class World {
-    name: string;
-    stage: createjs.Stage;
+class World extends GameObjectContainer {
+    name:string;
 
-    constructor(newStage: createjs.Stage) {
-        this.stage = newStage;
-        this.name = 'World name';
+    constructor(private stage:createjs.Stage) {
+        super();
+        this.name = 'My world';
     }
 
-    start() : void {
+    start():void {
         console.log('Drawing');
         var circle = new createjs.Shape();
         circle.graphics.beginFill('red').drawCircle(0, 0, 50);
@@ -17,5 +17,25 @@ class World {
         circle.y = 100;
         this.stage.addChild(circle);
         this.stage.update();
+    }
+
+    init():void {
+
+    }
+
+    loadContent():void {
+
+    }
+
+    update():void {
+        super.update();
+    }
+
+    draw(stage:createjs.Stage):void {
+        super.draw(stage);
+    }
+
+    unloadContent():void {
+
     }
 }
