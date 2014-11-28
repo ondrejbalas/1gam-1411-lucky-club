@@ -1,12 +1,25 @@
 ///<reference path="IGameObject.ts"/>
+console.log('Loaded GameObjectContainer')
 
 class GameObjectContainer implements IGameObject {
-    gameObjects:IGameObject[];
+    gameObjects:IGameObject[] = [];
 
-    init():void {
+    pushObject(obj:IGameObject):void {
+        this.gameObjects.push(obj);
     }
 
-    loadContent():void {
+    init():void {
+        for (var i = 0; i < this.gameObjects.length; i++) {
+            var obj = this.gameObjects[i];
+            obj.init();
+        }
+    }
+
+    loadContent(stage:createjs.Stage):void {
+        for (var i = 0; i < this.gameObjects.length; i++) {
+            var obj = this.gameObjects[i];
+            obj.loadContent(stage);
+        }
     }
 
     update():void {
@@ -16,13 +29,17 @@ class GameObjectContainer implements IGameObject {
         }
     }
 
-    draw(stage:createjs.Stage):void {
+    //draw(stage:createjs.Stage):void {
+    //    for (var i = 0; i < this.gameObjects.length; i++) {
+    //        var obj = this.gameObjects[i];
+    //        obj.draw(stage);
+    //    }
+    //}
+
+    unloadContent(stage:createjs.Stage):void {
         for (var i = 0; i < this.gameObjects.length; i++) {
             var obj = this.gameObjects[i];
-            obj.draw(stage);
+            obj.unloadContent(stage);
         }
-    }
-
-    unloadContent():void {
     }
 }

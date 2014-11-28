@@ -2,8 +2,8 @@
 
 interface IGameObject {
     init() : void
-    loadContent() : void
+    loadContent(stage:createjs.Stage) : void
     update() : void
-    draw(stage: createjs.Stage) : void
-    unloadContent() : void
+    //draw(stage: createjs.Stage) : void
+    unloadContent(stage:createjs.Stage) : void
 }

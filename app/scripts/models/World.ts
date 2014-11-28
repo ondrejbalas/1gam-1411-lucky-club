@@ -1,8 +1,15 @@
 ///<reference path="../../../typings/easeljs/easeljs.d.ts" />
 ///<reference path="GameObjectContainer.ts"/>
+///<reference path="Grid.ts"/>
+
+//require(['GameObjectContainer'], function() {
+//});
+
+console.log('Loaded World')
 
 class World extends GameObjectContainer {
     name:string;
+    private running:boolean;
 
     constructor(private stage:createjs.Stage) {
         super();
@@ -10,32 +17,38 @@ class World extends GameObjectContainer {
     }
 
     start():void {
-        console.log('Drawing');
-        var circle = new createjs.Shape();
-        circle.graphics.beginFill('red').drawCircle(0, 0, 50);
-        circle.x = 100;
-        circle.y = 100;
-        this.stage.addChild(circle);
+        this.init();
+        this.loadContent(this.stage);
+        this.running = true;
+
+        this.update();
         this.stage.update();
+        //while(this.running) {
+        //
+        //    this.running = false;
+        //}
+        //this.unloadContent(this.stage);
     }
 
     init():void {
+        super.pushObject(new Grid(4, 4, 32));
 
+        super.init();
     }
-
-    loadContent():void {
-
-    }
-
-    update():void {
-        super.update();
-    }
-
-    draw(stage:createjs.Stage):void {
-        super.draw(stage);
-    }
-
-    unloadContent():void {
-
-    }
+    //
+    //loadContent(stage:createjs.Stage):void {
+    //    super.loadContent(stage);
+    //}
+    //
+    //update():void {
+    //    super.update();
+    //}
+    //
+    ////draw(stage:createjs.Stage):void {
+    ////    super.draw(stage);
+    ////}
+    //
+    //unloadContent(stage:createjs.Stage):void {
+    //    super.unloadContent(stage);
+    //}
 }
