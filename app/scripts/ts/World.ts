@@ -5,7 +5,7 @@
 //require(['GameObjectContainer'], function() {
 //});
 
-console.log('Loaded World')
+console.log('Loaded World 2')
 
 class World extends GameObjectContainer {
     name:string;
@@ -31,7 +31,7 @@ class World extends GameObjectContainer {
     }
 
     init():void {
-        super.pushObject(new Grid(4, 4, 32));
+        super.pushObject(new Grid(20, 15, 40));
 
         super.init();
     }

@@ -1,8 +1,8 @@
 ///<reference path="../../typings/easeljs/easeljs.d.ts" />
 ///<reference path="../../typings/requirejs/require.d.ts" />
-///<reference path="models/World.ts"/>
+///<reference path="luckyclub.d.ts" />
 
-define(['easeljs', './models/GameObjectContainer', './models/World'], function() {
+define(['easeljs', './luckyclub'], function() {
     console.log('App started');
     var stage = new createjs.Stage('luckycanvas');
     var world = new World(stage);

@@ -18,23 +18,53 @@ module.exports = function (grunt) {
     // Define the configuration for all the tasks
     grunt.initConfig({
 
-        // Project settings
-        bower: {
-            all: {
-                rjsConfig: 'app/scripts/config.js'
-            }
-        },
-
         yeoman: {
             // Configurable paths
             app: 'app',
             dist: 'dist'
         },
 
+        // Project settings
+        bower: {
+            all: {
+                rjsConfig: '<%= yeoman.app %>/scripts/config.js'
+            }
+        },
+
+        ts: {
+            app: {
+                src: ['<%= yeoman.app %>/scripts/app.ts'],
+                out: '<%= yeoman.app %>/scripts/app.js',
+                options: {
+                    target: 'es3',
+                    sourceMaps: true,
+                    declaration: false,
+                    removeComments: false
+                }
+            },
+            dev: {
+                src: ['<%= yeoman.app %>/scripts/ts/**/*.ts'],
+                out: '<%= yeoman.app %>/scripts/luckyclub.js',
+                options: {
+                    target: 'es3',
+                    sourceMaps: true,
+                    declaration: true,
+                    removeComments: false
+                }
+            }
+        },
+
         // Watches files for changes and runs tasks based on the changed files
         watch: {
+            ts: {
+                files: ['<%= yeoman.app %>/scripts/app.ts', '<%= yeoman.app %>/scripts/ts/**/*.ts', '!<%= yeoman.app %>/scripts/ts/**/*.d.ts'],
+                tasks: ['ts:app', 'ts:dev', 'jshint'],
+                options: {
+                    livereload: true
+                }
+            },
             js: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/scripts/{,*/}*.ts'],
+                files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
                 tasks: ['jshint'],
                 options: {
                     livereload: true
@@ -334,6 +364,7 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-bower-requirejs');
+    grunt.loadNpmTasks('grunt-ts');
 
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
@@ -385,6 +416,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
+        'ts:dev',
         'newer:jshint',
         'bower',
         'test',
