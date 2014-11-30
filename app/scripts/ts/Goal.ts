@@ -1,17 +1,15 @@
 ///<reference path="../../../typings/easeljs/easeljs.d.ts" />
 
-class Player implements IGameObject {
+class Goal implements IGameObject {
     shape:createjs.Shape;
-    public x: number;
-    public y: number;
 
-    constructor() {
+    constructor(public x: number, public y: number) {
     }
 
     init():void {
         this.shape = new createjs.Shape();
         this.shape.graphics
-            .beginFill('blue').drawRect(19, 19, 40, 40)
+            .beginFill('#FFCC00').drawRect(19, 19, 40, 40)
         this.shape.x = this.x * 80;
         this.shape.y = this.y * 80;
     }

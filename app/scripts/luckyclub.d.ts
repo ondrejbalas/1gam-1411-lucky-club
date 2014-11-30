@@ -13,6 +13,16 @@ declare class GameObjectContainer implements IGameObject {
     update(): void;
     unloadContent(stage: createjs.Stage): void;
 }
+declare class Goal implements IGameObject {
+    x: number;
+    y: number;
+    shape: createjs.Shape;
+    constructor(x: number, y: number);
+    init(): void;
+    loadContent(stage: createjs.Stage): void;
+    update(): void;
+    unloadContent(stage: createjs.Stage): void;
+}
 declare class Square implements IGameObject {
     x: number;
     y: number;

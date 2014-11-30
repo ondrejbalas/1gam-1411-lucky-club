@@ -2,16 +2,12 @@
 ///<reference path="GameObjectContainer.ts"/>
 ///<reference path="Grid.ts"/>
 
-//require(['GameObjectContainer'], function() {
-//});
-
 class World extends GameObjectContainer {
     name:string;
     private running:boolean;
 
     // hold a reference to things I'll need to refer to later
     grid:Grid;
-    player:Player;
 
     constructor(private stage:createjs.Stage) {
         super();
@@ -35,11 +31,6 @@ class World extends GameObjectContainer {
     init():void {
         this.grid = new Grid(10, 8, 80);
         super.pushObject(this.grid);
-
-        this.player = new Player(0, 0);
-        super.pushObject(this.player);
-
-        this.grid.placePlayer(this.player);
 
         super.init();
     }
