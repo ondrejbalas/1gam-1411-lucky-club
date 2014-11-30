@@ -1,6 +1,5 @@
 ///<reference path="../../../typings/easeljs/easeljs.d.ts" />
 ///<reference path="IGameObject.ts"/>
-console.log('Loaded GameObjectContainer');
 var GameObjectContainer = (function () {
     function GameObjectContainer() {
         this.gameObjects = [];
@@ -47,11 +46,11 @@ var Square = (function () {
         this.x = x;
         this.y = y;
         this.size = size;
-        this.color = Math.random() > 0.5 ? 'red' : 'blue';
+        this.color = Math.random() > 0.5 ? 'red' : 'green';
     }
     Square.prototype.init = function () {
         this.shape = new createjs.Shape();
-        this.shape.graphics.beginFill(this.color).drawRect(0, 0, this.size, this.size);
+        this.shape.graphics.beginFill('black').drawRect(0, 0, this.size, this.size).beginFill('white').drawRect(2, 2, this.size - 4, this.size - 4).beginFill(this.color).drawRect((this.size / 2) - 4, (this.size / 2) - 4, 8, 8);
         this.shape.x = this.x * this.size;
         this.shape.y = this.y * this.size;
     };
@@ -90,14 +89,41 @@ var Grid = (function (_super) {
         }
         _super.prototype.init.call(this);
     };
+    Grid.prototype.placePlayer = function (player) {
+        player.x = Math.floor(Math.random() * 2);
+        player.y = Math.floor(Math.random() * this.height);
+    };
     return Grid;
 })(GameObjectContainer);
+///<reference path="../../../typings/easeljs/easeljs.d.ts" />
+var Player = (function () {
+    function Player(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    Player.prototype.init = function () {
+        this.shape = new createjs.Shape();
+        this.shape.graphics.beginFill('blue').drawRect(19, 19, 40, 40);
+        this.shape.x = this.x * 80;
+        this.shape.y = this.y * 80;
+    };
+    Player.prototype.loadContent = function (stage) {
+        stage.addChild(this.shape);
+    };
+    Player.prototype.update = function () {
+        this.shape.x = this.x * 80;
+        this.shape.y = this.y * 80;
+    };
+    Player.prototype.unloadContent = function (stage) {
+        stage.removeChild(this.shape);
+    };
+    return Player;
+})();
 ///<reference path="../../../typings/easeljs/easeljs.d.ts" />
 ///<reference path="GameObjectContainer.ts"/>
 ///<reference path="Grid.ts"/>
 //require(['GameObjectContainer'], function() {
 //});
-console.log('Loaded World 2');
 var World = (function (_super) {
     __extends(World, _super);
     function World(stage) {
@@ -118,7 +144,11 @@ var World = (function (_super) {
         //this.unloadContent(this.stage);
     };
     World.prototype.init = function () {
-        _super.prototype.pushObject.call(this, new Grid(20, 15, 40));
+        this.grid = new Grid(10, 8, 80);
+        _super.prototype.pushObject.call(this, this.grid);
+        this.player = new Player(0, 0);
+        _super.prototype.pushObject.call(this, this.player);
+        this.grid.placePlayer(this.player);
         _super.prototype.init.call(this);
     };
     return World;

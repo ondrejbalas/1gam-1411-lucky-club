@@ -5,11 +5,13 @@
 //require(['GameObjectContainer'], function() {
 //});
 
-console.log('Loaded World 2')
-
 class World extends GameObjectContainer {
     name:string;
     private running:boolean;
+
+    // hold a reference to things I'll need to refer to later
+    grid:Grid;
+    player:Player;
 
     constructor(private stage:createjs.Stage) {
         super();
@@ -31,7 +33,13 @@ class World extends GameObjectContainer {
     }
 
     init():void {
-        super.pushObject(new Grid(20, 15, 40));
+        this.grid = new Grid(10, 8, 80);
+        super.pushObject(this.grid);
+
+        this.player = new Player(0, 0);
+        super.pushObject(this.player);
+
+        this.grid.placePlayer(this.player);
 
         super.init();
     }

@@ -2,7 +2,7 @@
 ///<reference path="IGameObject.ts"/>
 
 class Square implements IGameObject {
-    color = Math.random() > 0.5 ? 'red' : 'blue';
+    color = Math.random() > 0.5 ? 'red' : 'green';
     shape:createjs.Shape;
 
     constructor(public x:number, public y:number, public size:number) {
@@ -10,7 +10,10 @@ class Square implements IGameObject {
 
     init():void {
         this.shape = new createjs.Shape();
-        this.shape.graphics.beginFill(this.color).drawRect(0, 0, this.size, this.size);
+        this.shape.graphics
+            .beginFill('black').drawRect(0, 0, this.size, this.size)
+            .beginFill('white').drawRect(2, 2, this.size - 4, this.size - 4)
+            .beginFill(this.color).drawRect((this.size / 2) - 4, (this.size / 2) - 4, 8, 8);
         this.shape.x = this.x * this.size;
         this.shape.y = this.y * this.size;
     }

@@ -16,4 +16,9 @@ class Grid extends GameObjectContainer {
         }
         super.init();
     }
+
+    placePlayer(player:Player):void {
+        player.x = Math.floor(Math.random() * 2);
+        player.y = Math.floor(Math.random() * this.height);
+    }
 }

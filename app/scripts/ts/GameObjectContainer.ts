@@ -1,5 +1,4 @@
 ///<reference path="IGameObject.ts"/>
-console.log('Loaded GameObjectContainer')
 
 class GameObjectContainer implements IGameObject {
     gameObjects:IGameObject[] = [];

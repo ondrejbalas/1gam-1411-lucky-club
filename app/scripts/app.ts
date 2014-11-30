@@ -3,7 +3,6 @@
 ///<reference path="luckyclub.d.ts" />
 
 define(['easeljs', './luckyclub'], function() {
-    console.log('App started');
     var stage = new createjs.Stage('luckycanvas');
     var world = new World(stage);
     world.start();
